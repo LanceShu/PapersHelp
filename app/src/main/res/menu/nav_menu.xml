@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/papers_consult"
+            android:icon="@mipmap/apply"
+            android:title="办证咨询"/>
+
+        <item android:id="@+id/papers_me"
+            android:icon="@mipmap/progress"
+            android:title="我的申请"/>
+
+    </group>
+
+    <group android:checkableBehavior="single">
+
+        <item android:id="@+id/papers_setting"
+            android:icon="@mipmap/setting"
+            android:title="设置"/>
+
+        <item android:id="@+id/papers_about"
+            android:icon="@mipmap/about"
+            android:title="关于"/>
+
+    </group>
+
+
+
+</menu>

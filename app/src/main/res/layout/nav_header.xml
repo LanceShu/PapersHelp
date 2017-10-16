@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="180dp"
+    android:background="?attr/colorPrimary"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/header_image"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:background="@color/register_background">
+
+        <ImageView
+            android:id="@+id/papers"
+            android:layout_width="45dp"
+            android:layout_height="35dp"
+            android:src="@mipmap/papes"
+            android:layout_alignParentBottom="true"/>
+
+        <TextView
+            android:layout_toRightOf="@id/papers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="高新区证件办理"
+            android:textColor="#fff"
+            android:textSize="24sp"
+            android:layout_alignParentBottom="true"/>
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

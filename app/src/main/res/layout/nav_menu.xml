@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="16dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:id="@+id/papers_consult"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:src="@mipmap/apply"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="办证咨询"
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:paddingLeft="48dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/papers_me"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:src="@mipmap/progress"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="我的申请"
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:paddingLeft="48dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/papers_setting"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:src="@mipmap/setting"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="设置"
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:paddingLeft="48dp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/papers_about"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="30dp"
+            android:layout_height="25dp"
+            android:layout_gravity="center"
+            android:layout_marginLeft="18dp"
+            android:src="@mipmap/about" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:text="关于"
+            android:textSize="18sp"
+            android:gravity="center|left"
+            android:paddingLeft="48dp"/>
+
+    </LinearLayout>
+
+</LinearLayout>
