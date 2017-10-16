@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="papersType">
+
+        <item>身份证件</item>
+        <item>资格证件</item>
+        <item>关系证件</item>
+
+    </string-array>
+
+</resources>
