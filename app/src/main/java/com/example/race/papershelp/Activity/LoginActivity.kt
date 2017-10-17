@@ -66,11 +66,9 @@ class LoginActivity : AppCompatActivity(){
                         if(cursor.getString(cursor.getColumnIndex("uPass")) == login_pass.text.toString()){
                             Content.uName = login_name.text.toString()
                             Content.uPass = login_pass.text.toString()
-                            Toast.makeText(this@LoginActivity,"登录成功!",Toast.LENGTH_SHORT).show()
-                            Content.handler.postDelayed(Runnable {
-                                val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
-                                startActivity(loginToMain)
-                                finish() },1000)
+                            val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
+                            startActivity(loginToMain)
+                            //finish()
                         }else{
                             Toast.makeText(this@LoginActivity,"账号密码不正确，请重新输入!",Toast.LENGTH_SHORT).show()
                         }

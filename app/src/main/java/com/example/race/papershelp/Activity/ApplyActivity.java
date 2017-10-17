@@ -41,6 +41,8 @@ import com.example.race.papershelp.R;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by Lance on 2017/10/16.
@@ -162,19 +164,27 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
                 }else if(identity.getText().toString().length() < 15){
                     Toast.makeText(this,"请填写正确的身份证号！",Toast.LENGTH_SHORT).show();
                 }else{
-                    applyInfo(name.getText().toString(),phone.getText().toString(),identity.getText().toString(),mail.getText().toString());
+                    //获取当前的时间;
+                    long time = System.currentTimeMillis();
+                    Date date = new Date(time);
+                    //将时间格式化;
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                    //格式化后的时间;
+                    String aTime = simpleDateFormat.format(date);
+                    applyInfo(name.getText().toString(),phone.getText().toString(),identity.getText().toString(),mail.getText().toString(),aTime);
                 }
                 break;
         }
     }
 
-    private void applyInfo(String name, String phone, String identity,String mail) {
+    private void applyInfo(String name, String phone, String identity,String mail,String time) {
         ContentValues values = new ContentValues();
         values.put("aUser", Content.uName);
         values.put("aName",name);
         values.put("aPhone",phone);
         values.put("aIdentity",identity);
         values.put("aMail",mail);
+        values.put("aTime",time);
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
         Content.handler.postDelayed(new Runnable() {

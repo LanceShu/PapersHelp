@@ -5,7 +5,10 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
+import android.util.Log
+import android.widget.CompoundButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.ConsultFragment
 
@@ -43,11 +46,13 @@ class MainActivity : AppCompatActivity() {
             /*我申请的证件、申请的进度*/
 
         })
-        //设置
-        papers_setting.setOnClickListener({
-            /*清理缓存、意见反馈*/
-
+        //夜间模式
+        papers_setting.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, p1: Boolean) {
+                Toast.makeText(this@MainActivity,p1.toString(),Toast.LENGTH_SHORT).show()
+            }
         })
+
         //关于
         papers_me.setOnClickListener({
             /*关于程序*/

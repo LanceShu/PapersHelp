@@ -54,7 +54,6 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/papers_setting"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:orientation="horizontal">
@@ -70,10 +69,19 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="match_parent"
-            android:text="设置"
+            android:text="夜间模式"
             android:textSize="16sp"
             android:gravity="center|left"
             android:paddingLeft="48dp"/>
+
+        <Switch
+            android:id="@+id/papers_setting"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_marginRight="6dp"
+            android:switchMinWidth="50dp"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
 
