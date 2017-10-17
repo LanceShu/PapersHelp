@@ -17,6 +17,14 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             +"uPhone text,"
             +"uPass text)";
 
+    public static final String CREATE_APPLY = "create table Apply("
+            +"id integer primary key autoincrement,"
+            +"aUser text,"
+            +"aName text,"
+            +"aPhone text,"
+            +"aIdentity text,"
+            +"aMail text)";
+
     public MyDataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);
         this.context = context;
@@ -25,10 +33,12 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_USER);
+        db.execSQL(CREATE_APPLY);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists User");
+        db.execSQL("drop table if exists Apply");
     }
 }

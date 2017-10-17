@@ -23,7 +23,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="办证咨询"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="center|left"
             android:paddingLeft="48dp"/>
 
@@ -37,7 +37,7 @@
 
         <ImageView
             android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
             android:layout_marginLeft="18dp"
             android:src="@mipmap/progress"/>
@@ -47,7 +47,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="我的申请"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="center|left"
             android:paddingLeft="48dp"/>
 
@@ -61,7 +61,7 @@
 
         <ImageView
             android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
             android:layout_marginLeft="18dp"
             android:src="@mipmap/setting"/>
@@ -71,7 +71,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="设置"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="center|left"
             android:paddingLeft="48dp"/>
 
@@ -86,7 +86,7 @@
         <ImageView
             android:id="@+id/imageView"
             android:layout_width="30dp"
-            android:layout_height="25dp"
+            android:layout_height="22dp"
             android:layout_gravity="center"
             android:layout_marginLeft="18dp"
             android:src="@mipmap/about" />
@@ -96,7 +96,7 @@
             android:layout_weight="1"
             android:layout_height="match_parent"
             android:text="关于"
-            android:textSize="18sp"
+            android:textSize="16sp"
             android:gravity="center|left"
             android:paddingLeft="48dp"/>
 

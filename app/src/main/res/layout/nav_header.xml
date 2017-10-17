@@ -20,7 +20,7 @@
         <ImageView
             android:id="@+id/papers"
             android:layout_width="45dp"
-            android:layout_height="35dp"
+            android:layout_height="24dp"
             android:src="@mipmap/papes"
             android:layout_alignParentBottom="true"/>
 
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:text="高新区证件办理"
             android:textColor="#fff"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:layout_alignParentBottom="true"/>
 
 

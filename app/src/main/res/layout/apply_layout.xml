@@ -33,12 +33,14 @@
                 android:src="@mipmap/name"/>
 
             <EditText
+                android:id="@+id/apply_name"
                 android:layout_marginLeft="16dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
                 android:hint="姓名（必填）"
+                android:maxLines="1"
                 android:textSize="16sp"
                 android:gravity="center"/>
 
@@ -64,11 +66,14 @@
                 android:src="@mipmap/phone"/>
 
             <EditText
+                android:id="@+id/apply_phone"
                 android:layout_marginLeft="16dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
+                android:inputType="number"
+                android:maxLines="1"
                 android:hint="手机号（必填）"
                 android:textSize="16sp"
                 android:gravity="center"/>
@@ -95,12 +100,15 @@
                 android:src="@mipmap/identity"/>
 
             <EditText
+                android:id="@+id/apply_identity"
                 android:layout_marginLeft="16dp"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@null"
+                android:inputType="number"
                 android:hint="身份证号（必填）"
+                android:maxLines="1"
                 android:textSize="16sp"
                 android:gravity="center"/>
 
@@ -126,14 +134,16 @@
                 android:src="@mipmap/mail"/>
 
             <EditText
-                android:textSize="16sp"
-                android:layout_marginLeft="16dp"
+                android:id="@+id/apply_mail"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
                 android:layout_weight="1"
                 android:background="@null"
+                android:gravity="center"
+                android:maxLines="1"
                 android:hint="邮箱（可填）"
-                android:gravity="center"/>
+                android:textSize="16sp" />
 
         </LinearLayout>
 

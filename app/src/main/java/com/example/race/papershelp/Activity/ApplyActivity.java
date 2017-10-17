@@ -2,9 +2,11 @@ package com.example.race.papershelp.Activity;
 
 import android.Manifest;
 import android.content.ContentUris;
+import android.content.ContentValues;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
@@ -26,10 +28,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.race.papershelp.Content;
+import com.example.race.papershelp.DataBase.MyDataBaseHelper;
 import com.example.race.papershelp.MyView.SelectPictruePopupWindow;
 import com.example.race.papershelp.R;
 
@@ -71,15 +76,26 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
     private File outputImage;
 
     private SelectPictruePopupWindow sppw;
-    private Button applyEnter;
 
     //图片选择;
     private ImageView image1,image2,image3;
+    private EditText name;
+    private EditText phone;
+    private EditText identity;
+    private EditText mail;
+    private Button applyEnter;
+
+    private MyDataBaseHelper myDataBaseHelper;
+    private SQLiteDatabase db;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.apply_layout);
+
+        myDataBaseHelper = new MyDataBaseHelper(this,"PapersDB.db",null,1);
+        db = myDataBaseHelper.getWritableDatabase();
+
         //初始化控件;
         initWight();
     }
@@ -89,10 +105,15 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         image2 = (ImageView) findViewById(R.id.apply_image2);
         image3 = (ImageView) findViewById(R.id.apply_image3);
         applyEnter = (Button) findViewById(R.id.apply_enter);
+        name = (EditText) findViewById(R.id.apply_name);
+        phone = (EditText) findViewById(R.id.apply_phone);
+        identity = (EditText) findViewById(R.id.apply_identity);
+        mail = (EditText) findViewById(R.id.apply_mail);
 
         image1.setOnClickListener(this);
         image2.setOnClickListener(this);
         image3.setOnClickListener(this);
+        applyEnter.setOnClickListener(this);
     }
 
     @Override
@@ -132,7 +153,36 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
                     handler.sendMessage(m3);
                 }
                 break;
+            case R.id.apply_enter:
+                if(name.getText().toString().length() == 0 || phone.getText().toString().length() == 0
+                        || identity.getText().toString().length() == 0){
+                    Toast.makeText(this,"请完善信息填写！",Toast.LENGTH_SHORT).show();
+                }else if(phone.getText().toString().length() != 11){
+                    Toast.makeText(this,"请填写正确的手机号！",Toast.LENGTH_SHORT).show();
+                }else if(identity.getText().toString().length() < 15){
+                    Toast.makeText(this,"请填写正确的身份证号！",Toast.LENGTH_SHORT).show();
+                }else{
+                    applyInfo(name.getText().toString(),phone.getText().toString(),identity.getText().toString(),mail.getText().toString());
+                }
+                break;
         }
+    }
+
+    private void applyInfo(String name, String phone, String identity,String mail) {
+        ContentValues values = new ContentValues();
+        values.put("aUser", Content.uName);
+        values.put("aName",name);
+        values.put("aPhone",phone);
+        values.put("aIdentity",identity);
+        values.put("aMail",mail);
+        db.insert("Apply",null,values);
+        Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
+        Content.handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                finish();
+            }
+        },1000);
     }
 
     private void openCamera(int i){
