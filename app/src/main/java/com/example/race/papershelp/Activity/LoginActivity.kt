@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.example.race.papershelp.Content
@@ -31,6 +32,8 @@ class LoginActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setContentView(R.layout.login_activity)
+
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         editor = pref!!.edit()
         Content.isNightMode = pref!!.getBoolean("isNightMode",false)
@@ -39,8 +42,8 @@ class LoginActivity : AppCompatActivity(){
         }else{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        setContentView(R.layout.login_activity)
 
+        //初始化SQLite数据库
         myDataBaseHelper = MyDataBaseHelper(this,"PapersDB.db",null,1)
         db = myDataBaseHelper!!.writableDatabase
 
@@ -49,6 +52,14 @@ class LoginActivity : AppCompatActivity(){
     }
 
     fun initWight(){
+
+        Log.e("checkBox:",pref!!.getBoolean("remember",false).toString())
+        if(pref!!.getBoolean("remember",false)){
+            login_name.setText(pref!!.getString("name",""))
+            login_pass.setText(pref!!.getString("pass",""))
+            checkBox.isChecked = true
+        }
+
         //登录账号清除按钮;
         login_clear.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
@@ -83,9 +94,11 @@ class LoginActivity : AppCompatActivity(){
                             if(cursor.getString(cursor.getColumnIndex("uPass")) == login_pass.text.toString()){
                                 Content.uName = login_name.text.toString()
                                 Content.uPass = login_pass.text.toString()
+                                //记住账户密码；
+                                rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
                                 val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
                                 startActivity(loginToMain)
-                                //finish()
+                                finish()
                             }else{
                                 Toast.makeText(this@LoginActivity,"账号密码不正确，请重新输入!",Toast.LENGTH_SHORT).show()
                             }
@@ -107,5 +120,21 @@ class LoginActivity : AppCompatActivity(){
         })
 
 
+    }
+
+    private fun rememberNamePass(name: String, pass: String, checked: Boolean) {
+        Log.e("checked:",checked.toString())
+        if(checked){
+            editor!!.putBoolean("remember",true)
+            editor!!.putString("name",name)
+            editor!!.putString("pass",pass)
+            Log.e("remember:","success")
+        }else{
+            editor!!.putBoolean("remember",false)
+            editor!!.putString("name","")
+            editor!!.putString("pass","")
+            Log.e("remember:","failure")
+        }
+        editor!!.apply()
     }
 }
