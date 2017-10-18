@@ -20,4 +20,6 @@ public class Content {
     public static Context context;
 
     public static FragmentManager fragmentManager;
+
+    public static boolean isNightMode = false;
 }

@@ -14,7 +14,7 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="180dp"
-            android:background="@color/register_background"
+            android:background="@color/background"
             android:id="@+id/login_menu_layout_head">
 
             <TextView
@@ -22,9 +22,11 @@
                 android:layout_height="45dp"
                 android:text="高新园区证照办理"
                 android:textSize="20sp"
+                android:textColor="#fff"
+                android:layout_marginLeft="18dp"
                 android:layout_alignParentBottom="true"
-                android:textColor="@color/textColor"
-                android:layout_marginLeft="18dp"/>
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="18dp" />
 
 
         </RelativeLayout>
@@ -51,7 +53,8 @@
             android:padding="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/login_menu_layout_head">
+            android:layout_below="@+id/login_menu_layout_head"
+            android:background="#fff">
 
             <TextView
                 android:layout_marginTop="16dp"
@@ -60,7 +63,7 @@
                 android:layout_height="50dp"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:textColor="@color/register_background"
+                android:textColor="@color/textColor"
                 android:text="用户登录"
                 android:layout_alignParentStart="true"
                 android:id="@+id/textView" />
@@ -89,7 +92,7 @@
                     android:layout_weight="1"
                     android:layout_height="40dp"
                     android:textSize="15sp"
-                    android:textColorHint="#fff"
+                    android:textColorHint="@color/login_textColor"
                     android:inputType="number"
                     android:hint="请输入手机号"
                     android:gravity="center|left"
@@ -130,7 +133,7 @@
                     android:layout_weight="1"
                     android:textSize="15sp"
                     style="?android:attr/textViewStyle"
-                    android:textColorHint="#fff"
+                    android:textColorHint="@color/login_textColor"
                     android:hint="请输入登录密码"
                     android:gravity="center|left"
                     android:background="#D5EAD8"

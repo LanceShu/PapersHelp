@@ -1,9 +1,12 @@
 package com.example.race.papershelp.Activity
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.database.sqlite.SQLiteDatabase
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
+import android.support.v7.app.AppCompatDelegate
 import android.text.method.HideReturnsTransformationMethod
 import android.text.method.PasswordTransformationMethod
 import android.view.View
@@ -23,8 +26,19 @@ class LoginActivity : AppCompatActivity(){
     var myDataBaseHelper : MyDataBaseHelper? = null
     var db : SQLiteDatabase? = null
 
+    var pref : SharedPreferences? = null
+    var editor: SharedPreferences.Editor? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pref = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = pref!!.edit()
+        Content.isNightMode = pref!!.getBoolean("isNightMode",false)
+        if(Content.isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
         setContentView(R.layout.login_activity)
 
         myDataBaseHelper = MyDataBaseHelper(this,"PapersDB.db",null,1)
@@ -60,24 +74,26 @@ class LoginActivity : AppCompatActivity(){
         //登录按钮
         login_enter.setOnClickListener(object : View.OnClickListener{
             override fun onClick(p0: View?) {
-                val cursor = db!!.query("User",null,"uPhone = " + login_name.text.toString(),null,null,null,null)
-                if(cursor.moveToFirst()){
-                    do{
-                        if(cursor.getString(cursor.getColumnIndex("uPass")) == login_pass.text.toString()){
-                            Content.uName = login_name.text.toString()
-                            Content.uPass = login_pass.text.toString()
-                            Toast.makeText(this@LoginActivity,"登录成功!",Toast.LENGTH_SHORT).show()
-                            Content.handler.postDelayed(Runnable {
+                if(login_name.text.toString().length == 0 || login_pass.text.toString().length == 0){
+                    Toast.makeText(this@LoginActivity,"账号密码不能为空!",Toast.LENGTH_SHORT).show()
+                }else{
+                    val cursor = db!!.query("User",null,"uPhone = " + login_name.text.toString(),null,null,null,null)
+                    if(cursor.moveToFirst()){
+                        do{
+                            if(cursor.getString(cursor.getColumnIndex("uPass")) == login_pass.text.toString()){
+                                Content.uName = login_name.text.toString()
+                                Content.uPass = login_pass.text.toString()
                                 val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
                                 startActivity(loginToMain)
-                                finish() },1000)
-                        }else{
-                            Toast.makeText(this@LoginActivity,"账号密码不正确，请重新输入!",Toast.LENGTH_SHORT).show()
-                        }
-                    }while(cursor.moveToNext())
-                    cursor.close()
-                }else{
-                    Toast.makeText(this@LoginActivity,"用户不存在!",Toast.LENGTH_SHORT).show()
+                                //finish()
+                            }else{
+                                Toast.makeText(this@LoginActivity,"账号密码不正确，请重新输入!",Toast.LENGTH_SHORT).show()
+                            }
+                        }while(cursor.moveToNext())
+                        cursor.close()
+                    }else{
+                        Toast.makeText(this@LoginActivity,"用户不存在!",Toast.LENGTH_SHORT).show()
+                    }
                 }
             }
         })

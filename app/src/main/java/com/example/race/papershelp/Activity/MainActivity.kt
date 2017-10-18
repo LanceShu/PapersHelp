@@ -1,11 +1,17 @@
 package com.example.race.papershelp.Activity
 
 import android.app.Fragment
+import android.content.SharedPreferences
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.AppCompatDelegate
+import android.util.Log
+import android.widget.CompoundButton
 import android.widget.LinearLayout
+import android.widget.Toast
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.ConsultFragment
 
@@ -16,15 +22,30 @@ import kotlinx.android.synthetic.main.nav_menu.*
 
 class MainActivity : AppCompatActivity() {
 
+    var pref : SharedPreferences? = null
+    var editor: SharedPreferences.Editor? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        pref = PreferenceManager.getDefaultSharedPreferences(this)
+        editor = pref!!.edit()
+        Log.e("isNightMode:",Content.isNightMode.toString())
+        if(Content.isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
         setContentView(R.layout.activity_main)
+
         Content.context = this
+
         //初始化控件;
         initWight()
     }
 
     fun initWight(){
+
+        papers_setting.isChecked = Content.isNightMode
 
         replaceFragment(ConsultFragment())
 
@@ -43,11 +64,15 @@ class MainActivity : AppCompatActivity() {
             /*我申请的证件、申请的进度*/
 
         })
-        //设置
-        papers_setting.setOnClickListener({
-            /*清理缓存、意见反馈*/
-
+        //夜间模式
+        papers_setting.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
+            override fun onCheckedChanged(p0: CompoundButton?, status: Boolean) {
+                Content.isNightMode = status
+                //重启Activity
+                recreate()
+            }
         })
+
         //关于
         papers_me.setOnClickListener({
             /*关于程序*/
@@ -61,4 +86,12 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment,fragment)
         transaction.commit()
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        editor!!.clear()
+        editor!!.putBoolean("isNightMode",Content.isNightMode)
+        editor!!.apply()
+    }
+
 }

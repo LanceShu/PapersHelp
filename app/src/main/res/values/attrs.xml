@@ -10,4 +10,5 @@
         <attr name="borderRadius"/>
         <attr name="imageType"/>
     </declare-styleable>
+
 </resources>

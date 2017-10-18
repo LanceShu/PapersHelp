@@ -9,7 +9,7 @@
         android:id="@+id/register_layout_head"
         android:layout_width="match_parent"
         android:layout_height="180dp"
-        android:background="@color/register_background"
+        android:background="@color/background"
 
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true">
@@ -48,14 +48,14 @@
             android:id="@+id/register_layout_phonenumber_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/register_input_all_corner"
+            android:background="@drawable/login_edit_back"
             >
 
             <ImageView
                 android:layout_marginStart="10dp"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@mipmap/phone"
+                android:src="@mipmap/uphone"
                 android:layout_centerVertical="true"
                 android:id="@+id/register_layout_phonenumber_image"
                 />
@@ -89,7 +89,7 @@
             android:id="@+id/register_layout_password_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/register_input_all_corner"
+            android:background="@drawable/login_edit_back"
             android:layout_marginTop="25dp"
             >
 
@@ -131,7 +131,7 @@
             android:id="@+id/register_layout_password_agin_layout"
             android:layout_width="match_parent"
             android:layout_height="40dp"
-            android:background="@drawable/register_input_all_corner"
+            android:background="@drawable/login_edit_back"
             android:layout_marginTop="25dp"
             >
 
@@ -176,9 +176,9 @@
             android:layout_height="wrap_content"
             android:text="  注册  "
             android:layout_below="@id/register_layout_password_agin_layout"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="45dp"
             android:layout_centerHorizontal="true"
-            android:background="@drawable/register_layout_register_button_background"
+            android:background="@drawable/register_button_background"
             android:textSize="15sp"
             android:textColor="#fff"
             />

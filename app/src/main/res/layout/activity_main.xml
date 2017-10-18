@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context="com.example.race.papershelp.Activity.MainActivity">
 
@@ -20,7 +19,7 @@
             <android.support.v7.widget.Toolbar
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="@color/register_background">
+                android:background="@color/background">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -28,8 +27,8 @@
 
                     <ImageView
                         android:id="@+id/main_func"
-                        android:layout_width="30dp"
-                        android:layout_height="35dp"
+                        android:layout_width="25dp"
+                        android:layout_height="30dp"
                         android:layout_centerVertical="true"
                         android:src="@mipmap/more" />
 
@@ -49,7 +48,8 @@
                 android:id="@+id/fragment"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:background="@color/main_background">
 
             </FrameLayout>
 
