@@ -31,15 +31,15 @@
                         android:layout_width="30dp"
                         android:layout_height="35dp"
                         android:layout_centerVertical="true"
-                        android:src="@mipmap/more"/>
+                        android:src="@mipmap/more" />
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:gravity="center"
                         android:text="高新区证件办理"
                         android:textColor="#fff"
-                        android:gravity="center"
-                        android:textSize="18sp"/>
+                        android:textSize="18sp" />
 
                 </RelativeLayout>
 
@@ -55,7 +55,7 @@
 
         </LinearLayout>
 
-        <include layout="@layout/nav_layout"/>
+        <include layout="@layout/nav_layout" />
 
     </android.support.v4.widget.DrawerLayout>
 
