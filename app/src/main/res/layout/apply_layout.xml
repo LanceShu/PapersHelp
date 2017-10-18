@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/main_background">
 
         <TextView
             android:layout_width="match_parent"
@@ -17,7 +18,7 @@
             android:textSize="20sp"
             android:gravity="center"
             android:textColor="#fff"
-            android:background="@color/register_background"/>
+            android:background="@color/background"/>
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -36,10 +37,12 @@
                 android:id="@+id/apply_name"
                 android:layout_marginLeft="16dp"
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_weight="1"
+                android:layout_height="37dp"
+                android:layout_weight="0.91"
                 android:background="@null"
                 android:hint="姓名（必填）"
+                android:textColor="@color/main_textColor"
+                android:textColorHint="@color/main_textColor"
                 android:maxLines="1"
                 android:textSize="16sp"
                 android:gravity="center"/>
@@ -50,7 +53,7 @@
             android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/register_background"/>
+            android:background="@color/main_textColor"/>
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -75,6 +78,8 @@
                 android:inputType="number"
                 android:maxLines="1"
                 android:hint="手机号（必填）"
+                android:textColor="@color/main_textColor"
+                android:textColorHint="@color/main_textColor"
                 android:textSize="16sp"
                 android:gravity="center"/>
 
@@ -84,7 +89,7 @@
             android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/register_background"/>
+            android:background="@color/main_textColor"/>
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -108,6 +113,8 @@
                 android:background="@null"
                 android:inputType="number"
                 android:hint="身份证号（必填）"
+                android:textColor="@color/main_textColor"
+                android:textColorHint="@color/main_textColor"
                 android:maxLines="1"
                 android:textSize="16sp"
                 android:gravity="center"/>
@@ -118,7 +125,7 @@
             android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/register_background"/>
+            android:background="@color/main_textColor"/>
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -143,6 +150,8 @@
                 android:gravity="center"
                 android:maxLines="1"
                 android:hint="邮箱（可填）"
+                android:textColor="@color/main_textColor"
+                android:textColorHint="@color/main_textColor"
                 android:textSize="16sp" />
 
         </LinearLayout>
@@ -151,7 +160,7 @@
             android:layout_marginTop="6dp"
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@color/register_background"/>
+            android:background="@color/main_textColor"/>
 
         <LinearLayout
             android:layout_marginTop="8dp"
@@ -172,6 +181,8 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:text="图片资料（可选择）"
+                android:textColor="@color/main_textColor"
+                android:textColorHint="@color/main_textColor"
                 android:textSize="16sp"
                 android:gravity="center"/>
 
@@ -214,12 +225,14 @@
 
     <Button
         android:id="@+id/apply_enter"
-        android:layout_width="match_parent"
+        android:layout_width="250dp"
         android:layout_height="45dp"
         android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="16dp"
         android:text="点我申请"
         android:textSize="18sp"
         android:textColor="#fff"
-        android:background="@color/register_background"/>
+        android:background="@drawable/button_back"/>
 
 </RelativeLayout>

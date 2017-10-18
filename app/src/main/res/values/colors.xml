@@ -3,6 +3,14 @@
     <color name="colorPrimary">#5693b7</color>
     <color name="colorPrimaryDark">#5693b7</color>
     <color name="colorAccent">#5693b7</color>
-    <color name="register_background">#5693b7</color>
-    <color name="textColor">#e7e7e7</color>
+
+
+    <color name="background">#5693b7</color>
+    <color name="textColor">#5693b7</color>
+    <color name="login_textColor">#fff</color>
+    <color name="main_background">#fff</color>
+    <color name="buttonColor">#5693b7</color>
+
+    <color name="mainButtonColor">#5693b7</color>
+    <color name="main_textColor">#1f3643</color>
 </resources>

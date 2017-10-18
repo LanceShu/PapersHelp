@@ -15,7 +15,8 @@
             android:layout_height="match_parent"
             android:text="证件类型："
             android:textSize="18sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/main_textColor"/>
 
         <Spinner
             android:id="@+id/papersTypes"
@@ -38,7 +39,8 @@
             android:layout_height="match_parent"
             android:text="证件："
             android:textSize="18sp"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:textColor="@color/main_textColor"/>
 
         <Spinner
             android:id="@+id/papers"
@@ -84,7 +86,7 @@
                     android:id="@+id/papers_material"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:text="123111111111111111111111111111111111111111111111"
+                    android:textColor="@color/main_textColor"
                     android:textSize="16sp"
                     android:layout_alignParentTop="true"
                     android:layout_alignParentStart="true" />
