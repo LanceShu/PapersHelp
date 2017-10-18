@@ -63,7 +63,7 @@
             android:layout_height="22dp"
             android:layout_gravity="center"
             android:layout_marginLeft="18dp"
-            android:src="@mipmap/setting"/>
+            android:src="@mipmap/night"/>
 
         <TextView
             android:layout_width="0dp"

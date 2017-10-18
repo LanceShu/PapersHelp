@@ -53,17 +53,20 @@ class MainActivity : AppCompatActivity() {
         main_func.setOnClickListener({
             drawer_layout.openDrawer(GravityCompat.START)
         })
+
         //办证咨询;
         papers_consult.setOnClickListener({
             /*各种证件的办理流程、所需资料;
             * 申请办理（姓名、电话、身份证、邮箱（可填）、照片资料（可填））；*/
-
+            replaceFragment(ConsultFragment())
         })
+
         //我的申请
         papers_me.setOnClickListener({
             /*我申请的证件、申请的进度*/
 
         })
+
         //夜间模式
         papers_setting.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
             override fun onCheckedChanged(p0: CompoundButton?, status: Boolean) {
