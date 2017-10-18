@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.race.papershelp.Activity.ApplyActivity;
 import com.example.race.papershelp.Content;
@@ -76,7 +75,7 @@ public class ConsultFragment extends Fragment implements View.OnClickListener{
         identityList.add("港澳通行证");
 
         qualificationList.add("营运证");
-        qualificationList.add("营业执照");
+        qualificationList.add("营业执照（个体）");
         qualificationList.add("卫生许可证");
         qualificationList.add("国有土地使用证");
 

@@ -44,4 +44,5 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
         db.execSQL("drop table if exists Apply");
         onCreate(db);
     }
+
 }
