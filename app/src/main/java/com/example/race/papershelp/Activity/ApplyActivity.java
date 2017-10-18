@@ -70,6 +70,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
     private int preImage1 ;
     private int preImage2;
     private int preImage3;
+    private String applyName;
 
     private  static final String PATH_ADD = Environment.getExternalStorageDirectory()+"/School/";
     private int mExitTime;
@@ -98,6 +99,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         myDataBaseHelper = new MyDataBaseHelper(this,"PapersDB.db",null,1);
         db = myDataBaseHelper.getWritableDatabase();
 
+        applyName = getIntent().getStringExtra("aApply");
         //初始化控件;
         initWight();
     }
@@ -180,6 +182,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
     private void applyInfo(String name, String phone, String identity,String mail,String time) {
         ContentValues values = new ContentValues();
         values.put("aUser", Content.uName);
+        values.put("aApply",applyName);
         values.put("aName",name);
         values.put("aPhone",phone);
         values.put("aIdentity",identity);
@@ -187,6 +190,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         values.put("aTime",time);
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
+        Log.e("ApplyStatus:","申请已提交--"+applyName);
         Content.handler.postDelayed(new Runnable() {
             @Override
             public void run() {

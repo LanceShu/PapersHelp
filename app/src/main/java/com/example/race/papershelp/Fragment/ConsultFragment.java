@@ -164,6 +164,7 @@ public class ConsultFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.papers_apply_btn:
                 Intent mainToApply = new Intent(Content.context, ApplyActivity.class);
+                mainToApply.putExtra("aApply",searchName);
                 startActivity(mainToApply);
                 break;
         }

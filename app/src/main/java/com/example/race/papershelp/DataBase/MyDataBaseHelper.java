@@ -20,6 +20,7 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public static final String CREATE_APPLY = "create table Apply("
             +"id integer primary key autoincrement,"
             +"aUser text,"
+            +"aApply text,"
             +"aName text,"
             +"aPhone text,"
             +"aIdentity text,"
@@ -41,5 +42,6 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
         db.execSQL("drop table if exists User");
         db.execSQL("drop table if exists Apply");
+        onCreate(db);
     }
 }
