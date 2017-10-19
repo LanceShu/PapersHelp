@@ -22,4 +22,6 @@ public class Content {
     public static FragmentManager fragmentManager;
 
     public static boolean isNightMode = false;
+
+    public static boolean isRememberPass = false;
 }

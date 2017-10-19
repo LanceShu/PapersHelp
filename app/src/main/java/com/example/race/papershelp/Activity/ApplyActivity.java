@@ -192,12 +192,29 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
         Log.e("ApplyStatus:","申请已提交--"+applyName);
+
+        queryDataBase();
+
         Content.handler.postDelayed(new Runnable() {
             @Override
             public void run() {
                 finish();
             }
         },1000);
+    }
+
+    private void queryDataBase() {
+
+        Cursor cursor = db.query("Apply",null,null,null,null,null,null);
+        if(cursor.moveToFirst()){
+            do{
+                Log.e("name",cursor.getString(cursor.getColumnIndex("aName")));
+                Log.e("phone",cursor.getString(cursor.getColumnIndex("aPhone")));
+                Log.e("identity",cursor.getString(cursor.getColumnIndex("aIdentity")));
+                Log.e("mail",cursor.getString(cursor.getColumnIndex("aMail")));
+            }while(cursor.moveToNext());
+        }
+        cursor.close();
     }
 
     private void openCamera(int i){

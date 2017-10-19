@@ -32,11 +32,13 @@ class LoginActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.login_activity)
-
         pref = PreferenceManager.getDefaultSharedPreferences(this)
         editor = pref!!.edit()
         Content.isNightMode = pref!!.getBoolean("isNightMode",false)
+        Content.isRememberPass = pref!!.getBoolean("remember",false)
+        Log.e("checkBox:",pref!!.getBoolean("remember",false).toString())
+        setContentView(R.layout.login_activity)
+
         if(Content.isNightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
         }else{
@@ -53,8 +55,7 @@ class LoginActivity : AppCompatActivity(){
 
     fun initWight(){
 
-        Log.e("checkBox:",pref!!.getBoolean("remember",false).toString())
-        if(pref!!.getBoolean("remember",false)){
+        if(Content.isRememberPass){
             login_name.setText(pref!!.getString("name",""))
             login_pass.setText(pref!!.getString("pass",""))
             checkBox.isChecked = true
@@ -94,6 +95,7 @@ class LoginActivity : AppCompatActivity(){
                             if(cursor.getString(cursor.getColumnIndex("uPass")) == login_pass.text.toString()){
                                 Content.uName = login_name.text.toString()
                                 Content.uPass = login_pass.text.toString()
+                                rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
                                 //记住账户密码；
                                 val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
                                 startActivity(loginToMain)
@@ -137,8 +139,4 @@ class LoginActivity : AppCompatActivity(){
         editor!!.apply()
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
-    }
 }

@@ -65,6 +65,8 @@ class MainActivity : AppCompatActivity() {
         //夜间模式
         papers_setting.setOnCheckedChangeListener { p0, status ->
             Content.isNightMode = status
+            editor!!.putBoolean("isNightMode",Content.isNightMode)
+            editor!!.apply()
             //重启Activity
             recreate()
         }
@@ -82,13 +84,6 @@ class MainActivity : AppCompatActivity() {
         transaction.replace(R.id.fragment,fragment)
         transaction.commit()
         Log.e("replaceFragment", fragment.toString())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        editor!!.clear()
-        editor!!.putBoolean("isNightMode",Content.isNightMode)
-        editor!!.apply()
     }
 
 }
