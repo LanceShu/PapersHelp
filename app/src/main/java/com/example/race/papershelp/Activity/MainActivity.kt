@@ -2,11 +2,13 @@ package com.example.race.papershelp.Activity
 
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Message
 import android.preference.PreferenceManager
 import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.util.Log
+import android.view.Gravity
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.ConsultFragment
 import com.example.race.papershelp.Fragment.MyApplyFragment
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
 
     var pref : SharedPreferences? = null
     var editor: SharedPreferences.Editor? = null
+    var message: Message? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,6 +33,8 @@ class MainActivity : AppCompatActivity() {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
         setContentView(R.layout.activity_main)
+
+        message = Message()
 
         Content.context = this
         //初始化控件;
@@ -44,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         //打开菜单按钮;
         main_func.setOnClickListener({
             drawer_layout.openDrawer(GravityCompat.START)
-        })///////////////'
+        })
 
         //办证咨询;
         papers_consult.setOnClickListener({
@@ -77,6 +82,7 @@ class MainActivity : AppCompatActivity() {
             /*关于程序*/
             drawer_layout.closeDrawer(GravityCompat.START)
         })
+
     }
 
     private fun replaceFragment(fragment: android.support.v4.app.Fragment){
