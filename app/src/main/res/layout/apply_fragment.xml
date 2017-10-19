@@ -43,18 +43,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="37dp"
-                            android:layout_marginTop="16dp"
+                            android:layout_marginTop="14dp"
                             android:text="姓名："
                             android:textColor="#000000"
                             android:textSize="16sp" />
 
-                        <TextView
+
+                        <Spinner
                             android:id="@+id/apply_progress_name"
-                            android:layout_width="wrap_content"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="10dp"
-                            android:layout_marginTop="16dp"
-                            android:text="麻瓜刘"
+                            android:layout_gravity="center"
+                            android:text=""
                             android:textColor="#000000"
                             android:textSize="18sp" />
 
@@ -78,7 +78,7 @@
                             android:id="@+id/apply_progress_email"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="644678697@qq.com"
+                            android:text=""
                             android:layout_gravity="center"
                             android:textColor="#000000" />
 
@@ -111,7 +111,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="end|center"
-                            android:text="18049218002"
+                            android:text=""
                             android:textColor="#000000" />
                     </LinearLayout>
 
@@ -143,7 +143,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="450521199603098734"
+                        android:text=""
                         android:textColor="#000000" />
                 </LinearLayout>
             </LinearLayout>
