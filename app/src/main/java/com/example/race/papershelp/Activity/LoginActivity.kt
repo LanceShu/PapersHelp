@@ -95,7 +95,6 @@ class LoginActivity : AppCompatActivity(){
                                 Content.uName = login_name.text.toString()
                                 Content.uPass = login_pass.text.toString()
                                 //记住账户密码；
-                                rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
                                 val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
                                 startActivity(loginToMain)
                                 finish()
@@ -136,5 +135,10 @@ class LoginActivity : AppCompatActivity(){
             Log.e("remember:","failure")
         }
         editor!!.apply()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
     }
 }

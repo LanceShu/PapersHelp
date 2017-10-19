@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         //打开菜单按钮;
         main_func.setOnClickListener({
             drawer_layout.openDrawer(GravityCompat.START)
-        })
+        })///////////////'
 
         //办证咨询;
         papers_consult.setOnClickListener({
