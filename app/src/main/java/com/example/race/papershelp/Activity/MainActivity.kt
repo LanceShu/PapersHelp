@@ -31,7 +31,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         Content.context = this
-
         //初始化控件;
         initWight()
     }
