@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatDelegate
 import android.util.Log
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.ConsultFragment
+import com.example.race.papershelp.Fragment.MyApplyFragment
 import com.example.race.papershelp.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.nav_menu.*
@@ -57,7 +58,7 @@ class MainActivity : AppCompatActivity() {
         papers_me.setOnClickListener({
             /*我申请的证件、申请的进度*/
             Log.e("papers_me" , "我的申请")
-//            replaceFragment(MyApplyFragment())
+            replaceFragment(MyApplyFragment())
             drawer_layout.closeDrawer(GravityCompat.START)
         })
 

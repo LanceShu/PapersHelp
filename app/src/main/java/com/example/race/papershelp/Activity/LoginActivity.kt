@@ -97,6 +97,9 @@ class LoginActivity : AppCompatActivity(){
                                 //记住账户密码；
                                 val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
                                 startActivity(loginToMain)
+                                cursor.close()
+                                db!!.close()
+                                myDataBaseHelper!!.close()
                                 finish()
                             }else{
                                 Toast.makeText(this@LoginActivity,"账号密码不正确，请重新输入!",Toast.LENGTH_SHORT).show()
