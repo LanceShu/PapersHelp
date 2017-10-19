@@ -1,23 +1,16 @@
 package com.example.race.papershelp.Activity
 
-import android.app.Fragment
 import android.content.SharedPreferences
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.support.v4.app.FragmentManager
 import android.support.v4.view.GravityCompat
+import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.util.Log
-import android.widget.CompoundButton
-import android.widget.LinearLayout
-import android.widget.Toast
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.ConsultFragment
-
 import com.example.race.papershelp.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.nav_layout.*
 import kotlinx.android.synthetic.main.nav_menu.*
 
 class MainActivity : AppCompatActivity() {
@@ -46,7 +39,6 @@ class MainActivity : AppCompatActivity() {
     fun initWight(){
 
         papers_setting.isChecked = Content.isNightMode
-
         replaceFragment(ConsultFragment())
 
         //打开菜单按钮;
@@ -59,35 +51,38 @@ class MainActivity : AppCompatActivity() {
             /*各种证件的办理流程、所需资料;
             * 申请办理（姓名、电话、身份证、邮箱（可填）、照片资料（可填））；*/
             replaceFragment(ConsultFragment())
+            drawer_layout.closeDrawer(GravityCompat.START)
         })
 
         //我的申请
         papers_me.setOnClickListener({
             /*我申请的证件、申请的进度*/
-
+            Log.e("papers_me" , "我的申请")
+//            replaceFragment(MyApplyFragment())
+            drawer_layout.closeDrawer(GravityCompat.START)
         })
+
 
         //夜间模式
-        papers_setting.setOnCheckedChangeListener(object : CompoundButton.OnCheckedChangeListener{
-            override fun onCheckedChanged(p0: CompoundButton?, status: Boolean) {
-                Content.isNightMode = status
-                //重启Activity
-                recreate()
-            }
-        })
+        papers_setting.setOnCheckedChangeListener { p0, status ->
+            Content.isNightMode = status
+            //重启Activity
+            recreate()
+        }
 
         //关于
-        papers_me.setOnClickListener({
+        papers_about.setOnClickListener({
             /*关于程序*/
-
+            drawer_layout.closeDrawer(GravityCompat.START)
         })
     }
 
-    fun replaceFragment(fragment: android.support.v4.app.Fragment){
+    private fun replaceFragment(fragment: android.support.v4.app.Fragment){
         Content.fragmentManager = supportFragmentManager
         val transaction = Content.fragmentManager!!.beginTransaction()
         transaction.replace(R.id.fragment,fragment)
         transaction.commit()
+        Log.e("replaceFragment", fragment.toString())
     }
 
     override fun onDestroy() {
