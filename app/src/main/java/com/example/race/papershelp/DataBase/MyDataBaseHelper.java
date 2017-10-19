@@ -25,7 +25,9 @@ public class MyDataBaseHelper extends SQLiteOpenHelper {
             +"aPhone text,"
             +"aIdentity text,"
             +"aMail text,"
-            +"aTime text)";
+            +"aTime text,"
+            +"aAllProgress integer,"
+            +"aNowProgress integer)";
 
     public MyDataBaseHelper(Context context, String name, SQLiteDatabase.CursorFactory factory, int version) {
         super(context, name, factory, version);

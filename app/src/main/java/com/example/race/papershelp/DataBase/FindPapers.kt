@@ -6,6 +6,7 @@ package com.example.race.papershelp.DataBase
 object FindPapers{
 
     var response: String? = null
+    var AllProgress:Int? = null
 
     fun findPapers(paperName: String): String{
         when(paperName){
@@ -154,5 +155,22 @@ object FindPapers{
                     "办理按揭贷款的单身证明必须由民政部门开具。"
         }
         return response.toString()
+    }
+
+    fun findAllProgress(Apply: String): Int{
+        when (Apply) {
+            "身份证" -> AllProgress = 7
+            "居住证" -> AllProgress = 5
+            "护照" -> AllProgress = 4
+            "港澳通行证" -> AllProgress = 6
+            "营运证" -> AllProgress = 6
+            "营业执照" -> AllProgress = 4
+            "卫生许可证" -> AllProgress = 4
+            "国有土地使用证" -> AllProgress = 4
+            "结婚证" -> AllProgress =5
+            "离婚证" -> AllProgress = 4
+            "单身证明" -> AllProgress = 5
+        }
+        return AllProgress!!.toInt()
     }
 }

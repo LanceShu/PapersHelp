@@ -34,6 +34,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.race.papershelp.Content;
+import com.example.race.papershelp.DataBase.FindPapers;
 import com.example.race.papershelp.DataBase.MyDataBaseHelper;
 import com.example.race.papershelp.MyView.SelectPictruePopupWindow;
 import com.example.race.papershelp.R;
@@ -189,6 +190,8 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         values.put("aIdentity",identity);
         values.put("aMail",mail);
         values.put("aTime",time);
+        values.put("aAllProgress", FindPapers.INSTANCE.findAllProgress(applyName));
+        values.put("aNowProgress", 0);
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
         Log.e("ApplyStatus:","申请已提交--"+applyName);

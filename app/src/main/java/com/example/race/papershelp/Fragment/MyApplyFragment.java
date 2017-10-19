@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,7 +36,6 @@ public class MyApplyFragment extends Fragment {
 
     private MyDataBaseHelper myDataBaseHelper;
     private SQLiteDatabase db;
-    private Cursor cursor;
 
     private View view;
     private TextView ApplyProgressEmail,ApplyProgressPhone, ApplyProgressIDCard;
@@ -69,7 +69,7 @@ public class MyApplyFragment extends Fragment {
 
     private void initApplyMessage() {
         /*根据登陆的账户搜索出他的申请项目，以及展示他的个人信息 更新*/
-        cursor = db.query("Apply", null, "aUser = " + Content.uName, null, null, null, null);
+        Cursor cursor = db.query("Apply", null, "aUser = " + Content.uName, null, null, null, null);
         ApplyName = new ArrayList<>();
         ApplyName.add("");
         if (cursor.moveToFirst()) {
@@ -141,6 +141,20 @@ public class MyApplyFragment extends Fragment {
     }
     private void initApplyRecyclerVIew(String Name, String ApplyType) {
         /*根据申请的类型从数据库中获取相应的申请进度,选择实现不同的的Adapter*/
+        try {
+            Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
+                    + " and aName = ?" + " and aApply = ?", new String[]{Name, ApplyType});
+
+            if (cursor.moveToFirst()) {
+                int a = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
+                int b = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
+
+                Log.e("initApplyRecyclerVIew", "aAllProgress =" + a + "  aNowProgress = " + b);
+            }
+            cursor.close();
+        } catch (SQLException e) {
+            Toast.makeText(getContext(), "申请完毕", Toast.LENGTH_SHORT).show();
+        }
     }
 
 
