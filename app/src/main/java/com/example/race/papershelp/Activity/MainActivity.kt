@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatDelegate
 import android.util.Log
 import android.view.Gravity
 import com.example.race.papershelp.Content
+import com.example.race.papershelp.Fragment.AboutFragment
 import com.example.race.papershelp.Fragment.ConsultFragment
 import com.example.race.papershelp.Fragment.MyApplyFragment
 import com.example.race.papershelp.R
@@ -80,6 +81,7 @@ class MainActivity : AppCompatActivity() {
         //关于
         papers_about.setOnClickListener({
             /*关于程序*/
+            replaceFragment(AboutFragment())
             drawer_layout.closeDrawer(GravityCompat.START)
         })
 
