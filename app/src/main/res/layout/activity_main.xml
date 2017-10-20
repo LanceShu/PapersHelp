@@ -36,7 +36,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:gravity="center"
-                        android:text="高新区证件办理"
+                        android:text="高新园区证件办理"
                         android:textColor="#fff"
                         android:textSize="18sp" />
 
