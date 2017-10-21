@@ -13,4 +13,5 @@
 
     <color name="mainButtonColor">#5693b7</color>
     <color name="main_textColor">#fff</color>
+    <color name="Unprogress">#d4d7da</color>
 </resources>

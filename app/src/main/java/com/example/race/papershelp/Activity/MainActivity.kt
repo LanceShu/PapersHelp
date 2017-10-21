@@ -8,7 +8,6 @@ import android.support.v4.view.GravityCompat
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.app.AppCompatDelegate
 import android.util.Log
-import android.view.Gravity
 import com.example.race.papershelp.Content
 import com.example.race.papershelp.Fragment.AboutFragment
 import com.example.race.papershelp.Fragment.ConsultFragment
@@ -70,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
 
         //夜间模式
-        papers_setting.setOnCheckedChangeListener { p0, status ->
+        papers_setting.setOnCheckedChangeListener { _, status ->
             Content.isNightMode = status
             editor!!.putBoolean("isNightMode",Content.isNightMode)
             editor!!.apply()

@@ -3,11 +3,13 @@ package com.example.race.papershelp.Fragment;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,7 +19,10 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.race.papershelp.Adapter.ApplyProgressAdapter;
+import com.example.race.papershelp.Bean.ApplyProgressData;
 import com.example.race.papershelp.Content;
+import com.example.race.papershelp.DataBase.FindPapers;
 import com.example.race.papershelp.DataBase.MyDataBaseHelper;
 import com.example.race.papershelp.R;
 
@@ -34,7 +39,6 @@ public class MyApplyFragment extends Fragment {
     private List<String> ApplyItem;
     private List<String> ApplyName;
 
-    private MyDataBaseHelper myDataBaseHelper;
     private SQLiteDatabase db;
 
     private View view;
@@ -45,7 +49,7 @@ public class MyApplyFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        myDataBaseHelper = new MyDataBaseHelper(getContext(), "PapersDB.db", null, 1);
+        MyDataBaseHelper myDataBaseHelper = new MyDataBaseHelper(getContext(), "PapersDB.db", null, 1);
         db = myDataBaseHelper.getReadableDatabase();
     }
 
@@ -59,6 +63,7 @@ public class MyApplyFragment extends Fragment {
     }
 
     private void  initWight() {
+        /*绑定布局*/
         ApplyProgressName = (Spinner) view.findViewById(R.id.apply_progress_name);
         ApplyProgressIDCard = (TextView) view.findViewById(R.id.apply_progress_idcar);
         ApplyProgressPhone = (TextView) view.findViewById(R.id.apply_progress_phone);
@@ -97,6 +102,7 @@ public class MyApplyFragment extends Fragment {
     }
 
     private void initApplyItem(final String ApplyPersonName) {
+        /*获取申请人所申请的所有表的数据*/
         if (!ApplyPersonName.equals("")) {
             try {
                 Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
@@ -139,23 +145,79 @@ public class MyApplyFragment extends Fragment {
             }
         }
     }
+
     private void initApplyRecyclerVIew(String Name, String ApplyType) {
         /*根据申请的类型从数据库中获取相应的申请进度,选择实现不同的的Adapter*/
         try {
             Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
                     + " and aName = ?" + " and aApply = ?", new String[]{Name, ApplyType});
+            List<ApplyProgressData> DataShow = new ArrayList<>();
+            String[] MSG = FindPapers.INSTANCE.findProgressMessage(ApplyType);
 
             if (cursor.moveToFirst()) {
-                int a = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
-                int b = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
-
-                Log.e("initApplyRecyclerVIew", "aAllProgress =" + a + "  aNowProgress = " + b);
+                /*根据进度和申请类型获取相应的 DataList */
+                int all = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
+                int now = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
+                for (int i = 0; i < all; i++) {
+                    ApplyProgressData Data = new ApplyProgressData();
+                    Data.setDay("");
+                    Data.setTime("");
+                    Data.setProgressBarColor(i <= now);
+                    /*根据 申请类型选择相应的提示信息*/
+                    Data.setProgressContent(MSG != null ? MSG[i] : "");
+                    /*根据 申请类型选择相应的图标文件*/
+                    Data.setImage(GetApplyBitmap(ApplyType));
+                    DataShow.add(Data);
+                }
             }
             cursor.close();
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
+                    LinearLayoutManager.VERTICAL, false));
+            ApplyProgressAdapter adapter = new ApplyProgressAdapter(DataShow, getContext());
+//            recyclerView.setAdapter(adapter);
+
         } catch (SQLException e) {
             Toast.makeText(getContext(), "申请完毕", Toast.LENGTH_SHORT).show();
         }
     }
 
+    /*获取相应的显示图片*/
+    private Bitmap GetApplyBitmap(String ApplyName) {
+        if (ApplyName.equals("身份证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.idcar));//找出为什么
+
+        if (ApplyName.equals("居住证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.residence));
+
+        if (ApplyName.equals("护照"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.passport));
+
+        if (ApplyName.equals("港澳通行证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.exit_permit));
+
+        if (ApplyName.equals("营运证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.charter));
+
+        if (ApplyName.equals("营业执照"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.trading_card));
+
+        if (ApplyName.equals("卫生许可证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.health_license));
+
+        if (ApplyName.equals("国有土地使用证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.landcard));
+
+        if (ApplyName.equals("结婚证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.marriage_license));
+
+        if (ApplyName.equals("离婚证"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.divorce_certificate));
+
+        if (ApplyName.equals("单身证明"))
+            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog));
+
+        return null;
+    }
 
 }
