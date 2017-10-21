@@ -55,6 +55,7 @@ public class AboutFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.about_suggestion:
                 Toast.makeText(getContext(),"该功能还未开放~敬请期待~",Toast.LENGTH_SHORT).show();
+
                 break;
             default:
                 break;
