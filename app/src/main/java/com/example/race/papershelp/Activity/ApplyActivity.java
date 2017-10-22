@@ -172,7 +172,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
                     long time = System.currentTimeMillis();
                     Date date = new Date(time);
                     //将时间格式化;
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
                     //格式化后的时间;
                     String aTime = simpleDateFormat.format(date);
                     applyInfo(name.getText().toString(),phone.getText().toString(),identity.getText().toString(),mail.getText().toString(),aTime);
@@ -191,7 +191,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         values.put("aMail",mail);
         values.put("aTime",time);
         values.put("aAllProgress", FindPapers.INSTANCE.findAllProgress(applyName));
-        values.put("aNowProgress", 3);
+        values.put("aNowProgress", 0);
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
         Log.e("ApplyStatus:","申请已提交--"+applyName);

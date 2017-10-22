@@ -88,7 +88,15 @@ class LoginActivity : AppCompatActivity(){
             override fun onClick(p0: View?) {
                 if(login_name.text.toString().length == 0 || login_pass.text.toString().length == 0){
                     Toast.makeText(this@LoginActivity,"账号密码不能为空!",Toast.LENGTH_SHORT).show()
-                }else{
+//                }else if(login_name.text.toString().equals("10241024")
+//                        && login_pass.text.toString().equals("123456")){
+//                    /*设置管理者账号*/
+//                    Content.uName = login_name.text.toString()
+//                    Content.uPass = login_pass.text.toString()
+//                    rememberNamePass(login_name.text.toString(),login_pass.text.toString(),checkBox.isChecked)
+//                    val loginToMain = Intent(this@LoginActivity,MainActivity::class.java)
+//                    startActivity(loginToMain)
+                } else{
                     val cursor = db!!.query("User",null,"uPhone = " + login_name.text.toString(),null,null,null,null)
                     if(cursor.moveToFirst()){
                         do{

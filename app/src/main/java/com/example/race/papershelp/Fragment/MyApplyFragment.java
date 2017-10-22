@@ -1,5 +1,6 @@
 package com.example.race.papershelp.Fragment;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -27,6 +28,7 @@ import com.example.race.papershelp.DataBase.FindPapers;
 import com.example.race.papershelp.DataBase.MyDataBaseHelper;
 import com.example.race.papershelp.R;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -167,10 +169,26 @@ public class MyApplyFragment extends Fragment {
 
             if (cursor.moveToFirst()) {
                 /*根据进度和申请类型获取相应的 DataList */
-//                String[] TimeAndDay = {"",""};
                 int all = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
                 int now = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
-                Log.e("cursor", "now = " + now + "   " + "all = " + all);
+                Date NowDate = new Date(System.currentTimeMillis());
+                SimpleDateFormat simpleDateFormat =
+                        new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                Date ApplyDate = simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("aTime")));
+                /*设置更新间隔: 以每分钟为最小单位*/
+                int CompareTime  = (int) ((NowDate.getTime() - ApplyDate.getTime()) / 1000 / 60);
+                /*实现获取当前进度*/
+                if (CompareTime>now)
+                    now = CompareTime < all ? CompareTime : all;
+                Log.e("cursor", "now = " + now + "   " + "all = " + all + "  CompareTime = " + CompareTime);
+
+                /*更新数据库*/
+                ContentValues values = new ContentValues();
+                values.put("aNowProgress",now);
+                db.update("Apply", values, "aUser = " + Content.uName
+                        + " and aIdentity  = ?" + " and aApply = ?", new String[]{ID, ApplyType});
+                Log.e("update", "更新数据库成功");
+
                 for (int i = 0; i < all; i++) {
                     String[] TimeAndDay = {"",""};
                     ApplyProgressData Data = new ApplyProgressData();
@@ -178,12 +196,11 @@ public class MyApplyFragment extends Fragment {
                         TimeAndDay = cursor.getString(cursor.getColumnIndex("aTime")).split(" ");
                     }else {
                         if (i<=now) {
-                            Date date = new Date(System.currentTimeMillis());
-                            SimpleDateFormat simpleDateFormat =
-                                    new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
-                            TimeAndDay = simpleDateFormat.format(date).split(" ");
+                            TimeAndDay = simpleDateFormat.format(NowDate).split(" ");
                         }
                     }
+                    /*以下的信息显示，需要于后台密切配合显示申请的进度
+                    * 介于没有后台的支持，本App 暂时使用数据库 代替后台的部分功能.*/
                     Data.setProgressBarColor(i <= now);
                     Data.setDay(TimeAndDay[0]);
                     Data.setTime(TimeAndDay[1]);
@@ -203,6 +220,9 @@ public class MyApplyFragment extends Fragment {
 
         } catch (SQLException e) {
             Toast.makeText(getContext(), "申请完毕", Toast.LENGTH_SHORT).show();
+        } catch (ParseException e) {
+            Toast.makeText(getContext(), "失败", Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
         }
     }
 
