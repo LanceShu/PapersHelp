@@ -11,21 +11,26 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/logo"
+        android:icon="@mipmap/gaoxin"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/logo"
+        android:roundIcon="@mipmap/gaoxin"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".Activity.LoginActivity">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity android:name=".Activity.RegisterActivity"/>
+
         <activity android:name=".Activity.MainActivity"/>
+
         <activity android:name=".Activity.ApplyActivity"/>
+
 
         <provider
             android:authorities="com.example.race.papershelp"
