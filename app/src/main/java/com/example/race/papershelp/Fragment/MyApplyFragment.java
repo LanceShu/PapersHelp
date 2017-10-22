@@ -160,7 +160,7 @@ public class MyApplyFragment extends Fragment {
         /*根据申请的类型从数据库中获取相应的申请进度,选择实现不同的的Adapter*/
         try {
             Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
-                    + " and aIdentity = ?" + " and aApply = ?", new String[]{ID, ApplyType});
+                    + " and aIdentity  = ?" + " and aApply = ?", new String[]{ID, ApplyType});
             List<ApplyProgressData> DataShow = new ArrayList<>();
             String[] MSG = FindPapers.INSTANCE.findProgressMessage(ApplyType);
 
@@ -185,7 +185,7 @@ public class MyApplyFragment extends Fragment {
                     /*根据 申请类型选择相应的提示信息*/
                     Data.setProgressContent(MSG != null ? MSG[i] : "");
                     /*根据 申请类型选择相应的图标文件*/
-                    Data.setImage(GetApplyBitmap(ApplyType));
+                    Data.setImage(GetApplyBitmap(ApplyType,Data.isProgressBarColor()));
                     DataShow.add(Data);
                 }
             }
@@ -202,39 +202,72 @@ public class MyApplyFragment extends Fragment {
     }
 
     /*获取相应的显示图片*/
-    private Bitmap GetApplyBitmap(String ApplyName) {
+    private Bitmap GetApplyBitmap(String ApplyName,boolean Progressing ) {
         if (ApplyName.equals("身份证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.idcar));//找出为什么
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.idcar));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.idcar_false));
 
         if (ApplyName.equals("居住证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.residence));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.residence));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.residence_false));
 
         if (ApplyName.equals("护照"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.passport));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.passport));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.passport_false));
 
         if (ApplyName.equals("港澳通行证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.exit_permit));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.exit_permit));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.exit_permit_false));
 
         if (ApplyName.equals("营运证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.charter));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.charter));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.charter_false));
 
         if (ApplyName.equals("营业执照"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.trading_card));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.trading_card));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.trading_card_false));
 
         if (ApplyName.equals("卫生许可证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.health_license));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.health_license));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.health_license_false));
 
         if (ApplyName.equals("国有土地使用证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.landcard));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.landcard));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.landcard_false));
 
         if (ApplyName.equals("结婚证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.marriage_license));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.marriage_license));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.marriage_license_false));
 
         if (ApplyName.equals("离婚证"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.divorce_certificate));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.divorce_certificate));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.divorce_certificate_false));
 
         if (ApplyName.equals("单身证明"))
-            return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog));
+            if (Progressing)
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog));
+            else
+                return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog_false));
 
         return null;
     }
