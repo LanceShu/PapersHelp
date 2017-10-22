@@ -268,7 +268,6 @@ public class MyApplyFragment extends Fragment {
                 return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog));
             else
                 return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog_false));
-
         return null;
     }
 
