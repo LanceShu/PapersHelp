@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="150dp"
     android:paddingStart="30dp"
     android:paddingEnd="30dp"
     >
@@ -17,7 +17,7 @@
             android:id="@+id/foot_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:text="17:25\n2017-03-09"
             android:gravity="center"
             android:layout_marginEnd="5dp"
@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/foot_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:src="@drawable/idcar"
                 android:layout_gravity="center"
                 />
@@ -64,7 +64,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="3"
-            android:text="申请信息已审核:\n经民警对申请人的信息审核无误后，受理并打印申请人居民身份证申领登记表"
+            android:text="\n  在收到通知的一到两个工作日内，持居民身份证领取凭证到派出所领取居民身份证,
+        并进行指纹核验。经本人确认无误后在发放居民身份证登记表上签字，
+        领取居民身份证，换领居民身份证的，须交回原证"
             android:gravity="center"
             />
 

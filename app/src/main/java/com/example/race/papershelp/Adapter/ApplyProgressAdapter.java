@@ -28,14 +28,11 @@ public class ApplyProgressAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
 
-    private LayoutInflater aLayoutInflater;
-
     private List<ApplyProgressData> DataShow = new ArrayList<>();
 
     public ApplyProgressAdapter(List<ApplyProgressData> Show, Context context) {
         DataShow = Show;
         mContext = context;
-        aLayoutInflater = LayoutInflater.from(context);
     }
 
 
@@ -43,11 +40,11 @@ public class ApplyProgressAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_HEAD:
-                return new HeadViewHolder(aLayoutInflater.inflate(R.layout.apply_progress_head, parent, false));
+                return new HeadViewHolder(LayoutInflater.from(mContext).inflate(R.layout.apply_progress_head, parent, false));
             case TYPE_FOOT:
-                return new FootViewHolder(aLayoutInflater.inflate(R.layout.apply_progress_foot, parent, false));
+                return new FootViewHolder(LayoutInflater.from(mContext).inflate(R.layout.apply_progress_foot, parent, false));
             case TYPE_NORMOL:
-                return new NormalViewHolder(aLayoutInflater.inflate(R.layout.apply_progress_item, parent, false));
+                return new NormalViewHolder(LayoutInflater.from(mContext).inflate(R.layout.apply_progress_item, parent, false));
         }
         return null;
     }

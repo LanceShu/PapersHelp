@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="150dp"
     android:paddingStart="30dp"
     android:paddingEnd="30dp"
     >
@@ -17,7 +17,7 @@
             android:id="@+id/item_date"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1"
+            android:layout_weight="1.2"
             android:text="17:25\n2017-03-09"
             android:gravity="center"
             android:layout_marginEnd="5dp"
@@ -41,8 +41,8 @@
 
             <ImageView
                 android:id="@+id/item_image"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
                 android:src="@drawable/idcar"
                 android:layout_gravity="center"
                 />

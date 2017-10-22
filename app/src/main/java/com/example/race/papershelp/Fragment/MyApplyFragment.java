@@ -26,8 +26,11 @@ import com.example.race.papershelp.DataBase.FindPapers;
 import com.example.race.papershelp.DataBase.MyDataBaseHelper;
 import com.example.race.papershelp.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * Created by Kiboooo on 2017/10/18.
@@ -79,7 +82,9 @@ public class MyApplyFragment extends Fragment {
         ApplyName.add("");
         if (cursor.moveToFirst()) {
             do {
-                ApplyName.add(cursor.getString(cursor.getColumnIndex("aName")));
+                String base = cursor.getString(cursor.getColumnIndex("aName"));
+                if(ApplyName.indexOf(base)< 0)
+                    ApplyName.add(base);
             } while (cursor.moveToNext());
             ArrayAdapter<String> applyNameAdapter = new ArrayAdapter<>(Content.context, android.R.layout.simple_spinner_item, ApplyName);
             applyNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -160,8 +165,12 @@ public class MyApplyFragment extends Fragment {
                 int now = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
                 for (int i = 0; i < all; i++) {
                     ApplyProgressData Data = new ApplyProgressData();
-                    Data.setDay("");
-                    Data.setTime("");
+                    Date date = new Date(System.currentTimeMillis());
+                    SimpleDateFormat simpleDateFormat =
+                            new SimpleDateFormat("yyyy-MM-dd HH:MM", Locale.CHINA);
+                    String[] TimeAndDay = simpleDateFormat.format(date).split(" ");
+                    Data.setDay(TimeAndDay[0]);
+                    Data.setTime(TimeAndDay[1]);
                     Data.setProgressBarColor(i <= now);
                     /*根据 申请类型选择相应的提示信息*/
                     Data.setProgressContent(MSG != null ? MSG[i] : "");
@@ -175,7 +184,7 @@ public class MyApplyFragment extends Fragment {
             recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),
                     LinearLayoutManager.VERTICAL, false));
             ApplyProgressAdapter adapter = new ApplyProgressAdapter(DataShow, getContext());
-//            recyclerView.setAdapter(adapter);
+            recyclerView.setAdapter(adapter);
 
         } catch (SQLException e) {
             Toast.makeText(getContext(), "申请完毕", Toast.LENGTH_SHORT).show();
