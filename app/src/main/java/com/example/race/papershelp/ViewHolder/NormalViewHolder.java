@@ -36,8 +36,8 @@ public class NormalViewHolder extends ApplyAbstractViewHolder {
         MSG.setText(applyProgressData.getProgressContent());
         Image.setImageBitmap(applyProgressData.getImage());
         if (applyProgressData.isProgressBarColor()) {
-            Item_Up.setBackgroundResource(R.color.colorPrimary);
-            Item_Down.setBackgroundResource(R.color.colorPrimary);
+            Item_Up.setBackgroundResource(R.color.progress);
+            Item_Down.setBackgroundResource(R.color.progress);
         }
         else{
             Item_Up.setBackgroundResource(R.color.Unprogress);

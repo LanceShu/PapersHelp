@@ -191,7 +191,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
         values.put("aMail",mail);
         values.put("aTime",time);
         values.put("aAllProgress", FindPapers.INSTANCE.findAllProgress(applyName));
-        values.put("aNowProgress", 0);
+        values.put("aNowProgress", 3);
         db.insert("Apply",null,values);
         Toast.makeText(this,"申请已提交！",Toast.LENGTH_SHORT).show();
         Log.e("ApplyStatus:","申请已提交--"+applyName);

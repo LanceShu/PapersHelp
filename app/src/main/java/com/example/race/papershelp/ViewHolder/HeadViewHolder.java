@@ -32,7 +32,7 @@ public class HeadViewHolder extends ApplyAbstractViewHolder {
         MSG.setText(applyProgressData.getProgressContent());
         Image.setImageBitmap(applyProgressData.getImage());
         if (applyProgressData.isProgressBarColor())
-                Head_down.setBackgroundResource(R.color.colorPrimary);
+                Head_down.setBackgroundResource(R.color.progress);
         else
             Head_down.setBackgroundResource(R.color.Unprogress);
     }

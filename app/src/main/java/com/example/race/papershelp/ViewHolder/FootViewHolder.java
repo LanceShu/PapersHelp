@@ -32,7 +32,7 @@ public class FootViewHolder extends ApplyAbstractViewHolder {
         MSG.setText(applyProgressData.getProgressContent());
         Image.setImageBitmap(applyProgressData.getImage());
         if (applyProgressData.isProgressBarColor())
-            Foot_Up.setBackgroundResource(R.color.colorPrimary);
+            Foot_Up.setBackgroundResource(R.color.progress);
         else
             Foot_Up.setBackgroundResource(R.color.Unprogress);
     }
