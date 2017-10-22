@@ -35,6 +35,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import static android.os.Build.ID;
+
 /**
  * Created by Kiboooo on 2017/10/18.
  */
@@ -174,20 +176,22 @@ public class MyApplyFragment extends Fragment {
                 Date NowDate = new Date(System.currentTimeMillis());
                 SimpleDateFormat simpleDateFormat =
                         new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
-                Date ApplyDate = simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("aTime")));
-                /*设置更新间隔: 以每分钟为最小单位*/
-                int CompareTime  = (int) ((NowDate.getTime() - ApplyDate.getTime()) / 1000 / 60);
-                /*实现获取当前进度*/
-                if (CompareTime>now)
-                    now = CompareTime < all ? CompareTime : all;
-                Log.e("cursor", "now = " + now + "   " + "all = " + all + "  CompareTime = " + CompareTime);
-
-                /*更新数据库*/
-                ContentValues values = new ContentValues();
-                values.put("aNowProgress",now);
-                db.update("Apply", values, "aUser = " + Content.uName
-                        + " and aIdentity  = ?" + " and aApply = ?", new String[]{ID, ApplyType});
-                Log.e("update", "更新数据库成功");
+                /*获取当前进度*/
+                now = GetProgressing(ApplyType, NowDate, simpleDateFormat, now, all, cursor);
+//                Date ApplyDate = simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("aTime")));
+//                /*设置更新间隔: 以每分钟为最小单位*/
+//                int CompareTime  = (int) ((NowDate.getTime() - ApplyDate.getTime()) / 1000 / 60);
+//                /*实现获取当前进度*/
+//                if (CompareTime>now)
+//                    now = CompareTime < all ? CompareTime : all;
+//                Log.e("cursor", "now = " + now + "   " + "all = " + all + "  CompareTime = " + CompareTime);
+//
+//                /*更新数据库*/
+//                ContentValues values = new ContentValues();
+//                values.put("aNowProgress",now);
+//                db.update("Apply", values, "aUser = " + Content.uName
+//                        + " and aIdentity  = ?" + " and aApply = ?", new String[]{ID, ApplyType});
+//                Log.e("update", "更新数据库成功");
 
                 for (int i = 0; i < all; i++) {
                     String[] TimeAndDay = {"",""};
@@ -294,6 +298,25 @@ public class MyApplyFragment extends Fragment {
             else
                 return BitmapFactory.decodeStream(getResources().openRawResource(+ R.drawable.dog_false));
         return null;
+    }
+
+    private int GetProgressing(String ApplyType,Date NowDate,SimpleDateFormat simpleDateFormat,
+                               int now,int all,Cursor cursor) throws ParseException {
+        Date ApplyDate = simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("aTime")));
+        /*设置更新间隔: 以每分钟为最小单位*/
+        int CompareTime  = (int) ((NowDate.getTime() - ApplyDate.getTime()) / 1000 / 60);
+                /*实现获取当前进度*/
+        if (CompareTime>now)
+            now = CompareTime < all ? CompareTime : all;
+        Log.e("cursor", "now = " + now + "   " + "all = " + all + "  CompareTime = " + CompareTime);
+
+                /*更新数据库*/
+        ContentValues values = new ContentValues();
+        values.put("aNowProgress",now);
+        db.update("Apply", values, "aUser = " + Content.uName
+                + " and aIdentity  = ?" + " and aApply = ?", new String[]{ID, ApplyType});
+        Log.e("update", "更新数据库成功");
+        return now;
     }
 
 }
