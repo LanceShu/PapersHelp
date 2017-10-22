@@ -41,6 +41,7 @@ public class MyApplyFragment extends Fragment {
     /*申请项目数组*/
     private List<String> ApplyItem;
     private List<String> ApplyName;
+    private List<String> ApplyIDCard;
 
     private SQLiteDatabase db;
 
@@ -79,12 +80,16 @@ public class MyApplyFragment extends Fragment {
         /*根据登陆的账户搜索出他的申请项目，以及展示他的个人信息 更新*/
         Cursor cursor = db.query("Apply", null, "aUser = " + Content.uName, null, null, null, null);
         ApplyName = new ArrayList<>();
+        ApplyIDCard = new ArrayList<>();
+        ApplyIDCard.add("");
         ApplyName.add("");
         if (cursor.moveToFirst()) {
             do {
-                String base = cursor.getString(cursor.getColumnIndex("aName"));
-                if(ApplyName.indexOf(base)< 0)
-                    ApplyName.add(base);
+                String base = cursor.getString(cursor.getColumnIndex("aIdentity"));
+                if(ApplyIDCard.indexOf(base)< 0){
+                    ApplyIDCard.add(base);
+                    ApplyName.add(cursor.getString(cursor.getColumnIndex("aName")));
+                }
             } while (cursor.moveToNext());
             ArrayAdapter<String> applyNameAdapter = new ArrayAdapter<>(Content.context, android.R.layout.simple_spinner_item, ApplyName);
             applyNameAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -94,7 +99,7 @@ public class MyApplyFragment extends Fragment {
                 @Override
                 public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                     adapterView.setVisibility(View.VISIBLE);
-                    initApplyItem(ApplyName.get(i));
+                    initApplyItem(ApplyIDCard.get(i));
                 }
 
                 @Override
@@ -106,12 +111,12 @@ public class MyApplyFragment extends Fragment {
         cursor.close();
     }
 
-    private void initApplyItem(final String ApplyPersonName) {
+    private void initApplyItem(final String IDCard) {
         /*获取申请人所申请的所有表的数据*/
-        if (!ApplyPersonName.equals("")) {
+        if (!IDCard.equals("")) {
             try {
                 Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
-                        + " and aName = ?" , new String[]{ApplyPersonName});
+                        + " and aIdentity = ? " , new String[]{IDCard});
 
                 if (cursor.moveToFirst()) {
                     ApplyItem = new ArrayList<>();
@@ -134,7 +139,7 @@ public class MyApplyFragment extends Fragment {
                         @Override
                         public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                             adapterView.setVisibility(View.VISIBLE);
-                            initApplyRecyclerVIew(ApplyPersonName, ApplyItem.get(i));
+                            initApplyRecyclerVIew(IDCard, ApplyItem.get(i));
                         }
 
                         @Override
@@ -151,24 +156,29 @@ public class MyApplyFragment extends Fragment {
         }
     }
 
-    private void initApplyRecyclerVIew(String Name, String ApplyType) {
+    private void initApplyRecyclerVIew(String ID, String ApplyType) {
         /*根据申请的类型从数据库中获取相应的申请进度,选择实现不同的的Adapter*/
         try {
             Cursor cursor = db.rawQuery("select * from Apply where aUser = " + Content.uName
-                    + " and aName = ?" + " and aApply = ?", new String[]{Name, ApplyType});
+                    + " and aIdentity = ?" + " and aApply = ?", new String[]{ID, ApplyType});
             List<ApplyProgressData> DataShow = new ArrayList<>();
             String[] MSG = FindPapers.INSTANCE.findProgressMessage(ApplyType);
 
             if (cursor.moveToFirst()) {
                 /*根据进度和申请类型获取相应的 DataList */
+                String[] TimeAndDay = {"",""};
                 int all = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
                 int now = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
                 for (int i = 0; i < all; i++) {
                     ApplyProgressData Data = new ApplyProgressData();
-                    Date date = new Date(System.currentTimeMillis());
-                    SimpleDateFormat simpleDateFormat =
-                            new SimpleDateFormat("yyyy-MM-dd HH:MM", Locale.CHINA);
-                    String[] TimeAndDay = simpleDateFormat.format(date).split(" ");
+                    if (i == 0) {
+                        TimeAndDay = cursor.getString(cursor.getColumnIndex("aTime")).split(" ");
+                    }else {
+                        Date date = new Date(System.currentTimeMillis());
+                        SimpleDateFormat simpleDateFormat =
+                                new SimpleDateFormat("yyyy-MM-dd HH:MM", Locale.CHINA);
+                         TimeAndDay = simpleDateFormat.format(date).split(" ");
+                    }
                     Data.setDay(TimeAndDay[0]);
                     Data.setTime(TimeAndDay[1]);
                     Data.setProgressBarColor(i <= now);

@@ -172,7 +172,7 @@ public class ApplyActivity extends AppCompatActivity implements View.OnClickList
                     long time = System.currentTimeMillis();
                     Date date = new Date(time);
                     //将时间格式化;
-                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.CHINA);
+                    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
                     //格式化后的时间;
                     String aTime = simpleDateFormat.format(date);
                     applyInfo(name.getText().toString(),phone.getText().toString(),identity.getText().toString(),mail.getText().toString(),aTime);
