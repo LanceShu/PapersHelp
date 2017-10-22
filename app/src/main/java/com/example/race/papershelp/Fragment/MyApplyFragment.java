@@ -10,6 +10,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -166,22 +167,26 @@ public class MyApplyFragment extends Fragment {
 
             if (cursor.moveToFirst()) {
                 /*根据进度和申请类型获取相应的 DataList */
-                String[] TimeAndDay = {"",""};
+//                String[] TimeAndDay = {"",""};
                 int all = cursor.getInt(cursor.getColumnIndex("aAllProgress"));
                 int now = cursor.getInt(cursor.getColumnIndex("aNowProgress"));
+                Log.e("cursor", "now = " + now + "   " + "all = " + all);
                 for (int i = 0; i < all; i++) {
+                    String[] TimeAndDay = {"",""};
                     ApplyProgressData Data = new ApplyProgressData();
                     if (i == 0) {
                         TimeAndDay = cursor.getString(cursor.getColumnIndex("aTime")).split(" ");
                     }else {
-                        Date date = new Date(System.currentTimeMillis());
-                        SimpleDateFormat simpleDateFormat =
-                                new SimpleDateFormat("yyyy-MM-dd HH:MM", Locale.CHINA);
-                         TimeAndDay = simpleDateFormat.format(date).split(" ");
+                        if (i<=now) {
+                            Date date = new Date(System.currentTimeMillis());
+                            SimpleDateFormat simpleDateFormat =
+                                    new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.CHINA);
+                            TimeAndDay = simpleDateFormat.format(date).split(" ");
+                        }
                     }
+                    Data.setProgressBarColor(i <= now);
                     Data.setDay(TimeAndDay[0]);
                     Data.setTime(TimeAndDay[1]);
-                    Data.setProgressBarColor(i <= now);
                     /*根据 申请类型选择相应的提示信息*/
                     Data.setProgressContent(MSG != null ? MSG[i] : "");
                     /*根据 申请类型选择相应的图标文件*/
